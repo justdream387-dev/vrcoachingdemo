@@ -159,6 +159,133 @@
       #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
       #mobile-menu.open { max-height: 400px; }
     }
+
+    /* ══════════════════════════════════════════
+       TESTIMONIALS — VIDEO GRID
+    ══════════════════════════════════════════ */
+
+    /* ── Carousel track ── */
+    #testi-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.55s cubic-bezier(.4,0,.22,1);
+      will-change: transform;
+    }
+
+    /* ── Video card ── */
+    .vt-card {
+      flex: 0 0 calc(33.333% - 14px);
+      min-width: 0;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(.22,.68,0,1.2), box-shadow 0.28s ease;
+    }
+    .vt-card:hover { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(10,22,40,.22), 0 4px 12px rgba(10,22,40,.1); }
+    @media (max-width: 1024px) { .vt-card { flex: 0 0 calc(50% - 10px); } }
+    @media (max-width: 640px)  { .vt-card { flex: 0 0 calc(100% - 0px); } }
+
+    /* ── Thumbnail wrapper + play overlay ── */
+    .vt-thumb {
+      position: relative; overflow: hidden; border-radius: 20px 20px 0 0;
+      background: #0A1628; aspect-ratio: 16/9;
+    }
+    .vt-thumb video {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .5s ease;
+    }
+    .vt-card:hover .vt-thumb video { transform: scale(1.04); }
+
+    /* play button overlay */
+    .vt-play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, rgba(10,22,40,0) 30%, rgba(10,22,40,.7) 100%);
+      transition: background .3s ease;
+    }
+    .vt-card:hover .vt-play { background: linear-gradient(180deg, rgba(10,22,40,.1) 30%, rgba(10,22,40,.8) 100%); }
+    .vt-play-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(245,158,11,.95); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 0 rgba(245,158,11,.6);
+      animation: playPulse 2.5s ease-out infinite;
+      transition: transform .25s ease;
+    }
+    .vt-card:hover .vt-play-btn { transform: scale(1.12); }
+    @keyframes playPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(245,158,11,.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(245,158,11,0); }
+      100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
+    }
+
+    /* pov badge */
+    .vt-pov {
+      position: absolute; top: 12px; left: 12px;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 100px;
+      font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+    .vt-pov.student { background: rgba(245,158,11,.85); color: #0A1628; }
+    .vt-pov.parent  { background: rgba(13,148,136,.85); color: #fff; }
+
+    /* ── Card info strip ── */
+    .vt-info {
+      background: #fff; border: 1px solid #E2E8F0; border-top: none;
+      border-radius: 0 0 20px 20px; padding: 16px 18px 18px;
+    }
+
+    /* ── Lightbox ── */
+    #vt-lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(10,22,40,.92); backdrop-filter: blur(18px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+    #vt-lightbox.open { opacity: 1; visibility: visible; }
+    #vt-lb-inner {
+      position: relative; width: 92vw; max-width: 900px;
+      border-radius: 20px; overflow: hidden; background: #000;
+      transform: scale(.92); transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    #vt-lightbox.open #vt-lb-inner { transform: scale(1); }
+    #vt-lb-video { width: 100%; display: block; max-height: 80vh; background: #000; }
+    #vt-lb-close {
+      position: absolute; top: 12px; right: 12px; z-index: 10;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s;
+    }
+    #vt-lb-close:hover { background: rgba(255,255,255,.28); }
+
+    /* ── Nav dots ── */
+    .testi-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #CBD5E1; border: none; cursor: pointer;
+      transition: all .3s ease; padding: 0;
+    }
+    .testi-dot.active { width: 24px; border-radius: 4px; background: #F59E0B; }
+
+    /* ── Arrow buttons ── */
+    .testi-arrow {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid #E2E8F0; background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .25s ease; flex-shrink: 0;
+    }
+    .testi-arrow:hover { border-color: #F59E0B; background: #FEF3C7; }
+    .testi-arrow:disabled { opacity: .35; cursor: default; }
+    .testi-arrow:disabled:hover { border-color: #E2E8F0; background: #fff; }
+
+    /* ── "No video" placeholder (shown when src missing) ── */
+    .vt-no-video {
+      width: 100%; height: 100%; object-fit: cover;
+      background: linear-gradient(135deg, #1E293B 0%, #0A1628 100%);
+      display: flex; align-items: center; justify-content: center; color: #94A3B8;
+      font-size: .8rem;
+    }
   </style>
 </head>
 
@@ -193,6 +320,7 @@
         <a href="#courses" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Courses</a>
         <a href="#skills"  class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Skills</a>
         <a href="#pricing" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Pricing</a>
+        <a href="#testimonials" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Stories</a>
         <a href="#contact" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Contact</a>
       </div>
 
@@ -217,6 +345,7 @@
       <a href="#courses" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Courses</a>
       <a href="#skills"  onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Skills</a>
       <a href="#pricing" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Pricing</a>
+      <a href="#testimonials" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Stories</a>
       <a href="#contact" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 transition-colors">Contact</a>
       <button onclick="openModal(); closeMenu();" class="mt-3 w-full py-3 bg-amber-500 text-navy font-display font-700 text-sm rounded-xl">Enquire Now</button>
     </div>
@@ -730,6 +859,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
 </section>
 
@@ -896,7 +1027,126 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     CONTACT
+     TESTIMONIALS — VIDEO STORIES
+     ─────────────────────────────────────────────
+     HOW TO ADD YOUR OWN VIDEOS
+     ───────────────────────────
+     1. Drop your .mp4 files into  public/videoes/
+     2. Each video maps to one entry in the
+        TESTIMONIALS array in the <script> below.
+     3. Fields:
+          src   → "public/videoes/your-file.mp4"
+          name  → person's name
+          role  → e.g. "Parent" or "Student, Grade 11"
+          pov   → "parent" | "student"   (controls badge color)
+          quote → short pull-quote shown on the card
+     4. Save & redeploy. That's it — the carousel
+        auto-rebuilds from the array. No HTML edits needed.
+═══════════════════════════════════════════════ -->
+<section id="testimonials" class="py-24 bg-slate-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 reveal">
+      <div>
+        <div class="pill bg-amber-100 text-amber-700 border border-amber-200 mb-4">
+          <i data-lucide="video" class="w-3 h-3"></i> Real Stories
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-800 text-navy leading-tight">
+          Heard from the <span class="grad-text">People Who Matter</span>
+        </h2>
+        <p class="text-slate-500 mt-3 text-base max-w-lg">Parents and students share their journeys — in their own words, on video.</p>
+      </div>
+
+      <!-- Filter pills + Arrows (desktop) -->
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <button id="filter-all"     onclick="filterTestimonials('all')"     class="testi-filter-btn pill bg-navy text-white border border-navy">All</button>
+        <button id="filter-student" onclick="filterTestimonials('student')" class="testi-filter-btn pill bg-white text-slate-600 border border-slate-200 hover:border-amber-300">Students</button>
+        <button id="filter-parent"  onclick="filterTestimonials('parent')"  class="testi-filter-btn pill bg-white text-slate-600 border border-slate-200 hover:border-teal-300">Parents</button>
+      </div>
+    </div>
+
+    <!-- Carousel wrapper -->
+    <div class="relative reveal delay-1">
+      <div class="overflow-hidden" id="testi-viewport">
+        <div id="testi-track">
+          <!-- cards injected by JS -->
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="testi-empty" class="hidden py-20 text-center">
+        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="video-off" class="w-7 h-7 text-slate-400"></i>
+        </div>
+        <p class="text-slate-500 font-500">No testimonials in this category yet.</p>
+      </div>
+    </div>
+
+    <!-- Nav row: dots + arrows -->
+    <div class="flex items-center justify-center gap-4 mt-10 reveal delay-2" id="testi-nav">
+      <button class="testi-arrow" id="testi-prev" onclick="teCarousel(-1)" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14l-5-5 5-5" stroke="#475569" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="testi-dots" class="flex items-center gap-2"></div>
+      <button class="testi-arrow" id="testi-next" onclick="teCarousel(1)" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="#475569" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <!-- Trust strip below -->
+    <div class="mt-16 grid sm:grid-cols-3 gap-5 reveal delay-3">
+      <div class="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-card">
+        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="star" class="w-6 h-6 text-amber-500"></i>
+        </div>
+        <div>
+          <div class="font-display font-800 text-navy text-xl">40,000+</div>
+          <div class="text-slate-500 text-sm">Students Trained Since 2004</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-card">
+        <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="heart" class="w-6 h-6 text-teal-500"></i>
+        </div>
+        <div>
+          <div class="font-display font-800 text-navy text-xl">50,000+</div>
+          <div class="text-slate-500 text-sm">Families Trusted VR Coaching</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-card">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="trophy" class="w-6 h-6 text-purple-500"></i>
+        </div>
+        <div>
+          <div class="font-display font-800 text-navy text-xl">22+ Yrs</div>
+          <div class="text-slate-500 text-sm">of Consistent Results</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Video Lightbox ── -->
+<div id="vt-lightbox" role="dialog" aria-modal="true" aria-label="Video testimonial" onclick="closeLightbox(event)">
+  <div id="vt-lb-inner">
+    <button id="vt-lb-close" onclick="closeLightboxBtn()" aria-label="Close video">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M14 2L2 14" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <video id="vt-lb-video" controls playsinline preload="metadata"></video>
+    <div id="vt-lb-meta" class="px-5 py-4 bg-navy flex items-start gap-3">
+      <div>
+        <div id="vt-lb-name"  class="font-display font-700 text-white text-base"></div>
+        <div id="vt-lb-role"  class="text-slate-400 text-sm mt-0.5"></div>
+        <p  id="vt-lb-quote" class="text-slate-300 text-sm mt-2 leading-relaxed italic"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT (unchanged)
 ═══════════════════════════════════════════════ -->
 <section id="contact" class="py-24 bg-slate-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1270,6 +1520,325 @@
   }, { threshold: 0.5 });
 
   document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  /* ══════════════════════════════════════════════════════════
+     TESTIMONIALS ENGINE
+     ══════════════════════════════════════════════════════════
+
+     ▸ TO ADD A NEW VIDEO TESTIMONIAL:
+       Add an object to the TESTIMONIALS array below.
+
+       Required fields:
+         src   – path relative to your project root
+                 e.g.  "public/videos/priya-parent.mp4"
+         name  – speaker's name (string)
+         role  – short descriptor, e.g. "Parent of Grade 9 Student"
+                 or "Student, NEET Batch 2024"
+         pov   – "parent" or "student" (controls badge color & filter)
+         quote – one punchy sentence shown on the card
+
+       Optional:
+         poster – thumbnail image path (auto-generated from video if omitted)
+
+     ▸ TO REMOVE: delete the object from the array.
+     ▸ NO other HTML changes are needed.
+
+  ══════════════════════════════════════════════════════════ */
+
+  const TESTIMONIALS = [
+    /* ─── SAMPLE ENTRIES — replace src with your real file paths ─── */
+   
+    {
+      src:   'public/videoes/krutik.mp4',
+      name:  'Master Krutik',
+      role:  'D.A.V. Public School Student (96.40%)',
+      pov:   'student',
+      quote: 'One thing that VR Classes gave me, which I could not find elsewhere, was motivation. Along with regular tests and doubt-solving sessions, the faculty constantly encouraged me to keep improving. Mathematics was taught by Raj Sir, Pritam Sir, and Hrishikesh Sir, and learning from all of them was a great experience. I still remember Raj Sir telling me, "Anyone can do it—you just need that fire inside you." That belief helped me stay focused throughout my preparation. While most people only see the final marks, the faculty at VR Classes recognized and appreciated the effort behind them, which meant a lot to me and played an important role in helping me score 96.40%.'
+    },
+    {
+      src: 'public/videoes/krutik father.mp4',
+      name: 'Mr. Tirupati',
+      role: 'Parent of D.A.V. Public School Student (96.40%)',
+      pov: 'parent',
+      quote: 'We are extremely proud of our son and grateful to VR Classes for being a part of his academic journey. The constant support, guidance, and encouragement provided by the faculty helped him stay motivated and focused throughout his preparation. I would like to sincerely thank Raj Sir, Pritam Sir, and the entire teaching staff for their dedication towards every student. Their efforts, personal attention, and commitment to student success gave us great confidence as parents, and we are very happy with the progress and results our child achieved.'
+    },
+    {
+      src:   'public/videoes/sumedh tayshete.mp4',
+      name:  'Mr. Sumedh Tayshete',
+      role:  'Commerce Student, HSC Batch 2021–22 (90%)',
+      pov:   'student',
+      quote: 'I am grateful to VR Classes and all the faculty members for their constant guidance and support throughout my academic journey. A special thanks to Raj Sir for always motivating me and believing in my potential, and to Pritam Sir for his exceptional knowledge of the subject and dedication towards students. His teaching played a significant role in helping me score 98 marks in Accounts. The faculty was always approachable and ready to clear doubts whenever needed, which made learning much more effective and enjoyable.'
+    },
+    {
+      src:   'public/videoes/VID-20260524-WA0009.mp4',
+      name:  'Mr.Sanjay Bangar',
+      role:  'Parent of D.A.V. Public School Top Scorer (98.40% in SSC)',
+      pov:   'parent',
+      quote: 'Initially, we were not sure about enrolling our son at VR Classes. After meeting Raj Sir and Pritam Sir and understanding their approach towards teaching, we felt confident in our decision. The guidance and support he received helped him stay focused and perform well academically, eventually scoring 98.40% in his 10th board examinations.' 
+    },
+    
+    {
+      src:   'public/videoes/samiksha.mp4',
+      name:  'Miss Samiksha Sanjay Kadam',
+      role:  'S.S. High School Student (92.40%)',
+      pov:   'student',
+      quote: 'I am sincerely thankful to Pritam Sir, Raj Sir, and the entire support team at VR Classes for their guidance and encouragement throughout my academic journey. The personal attention given to every student and the positive learning environment helped me stay focused on my goals. For me, VR Classes was a place where my hopes gradually turned into reality. Their constant support and belief in my abilities played an important role in helping me achieve 92.40% in my 10th board examinations.'
+    },
+
+    {
+      src:   'public/videoes/VID-20260524-WA0013.mp4',
+      name:  'Miss Shravani Ravindra Bhoir',
+      role:  '3rd Rank Holder, D.A.V. Public School (2023)',
+      pov:   'student',
+      quote: 'The expertise of the faculty and the personal attention given to every student made a huge difference in my preparation. The weekly tests helped me regularly evaluate my progress and understand where I needed to improve. Their guidance and support played an important role in helping me secure 3rd rank at D.A.V. Public School.'
+    },
+    {
+    
+      src: 'public/videoes/dhanashree jadhav.mp4',
+      name: 'Miss Dhanashree Jadhav',
+      role: 'D.A.V. Public School Student, SSC Batch 2016–17 (95.60%)',
+      pov: 'student',
+      quote: 'I am grateful to Raj Sir and Pritam Sir for their guidance and support throughout my journey. At VR Classes, I learned much more than just academics. The faculty taught us valuable lessons that continue to help us in life beyond school. They always encouraged us to ask questions, clear our doubts, and be confident in ourselves. Their constant motivation and belief in their students played a major role in my success, and I would give a great deal of credit for my achievement of 95.60% to them.'
+    },
+    {
+      src:   'public/videoes/sakshi jagdale.mp4',
+      name:  'Miss Sakshi Jagdale',
+      role:  'SSC Student, Batch 2016–17 (92.20%)',
+      pov:   'student',
+      quote: 'I am thankful to Raj Sir and Pritam Sir for their guidance and support throughout my SSC journey. My experience at VR Classes was excellent. The teaching was very effective—if a student did not understand a concept the first time, the faculty would patiently explain it again until it became clear. Raj Sir’s motivation and encouragement helped me stay confident and focused. I had never imagined scoring 92.20%, and with the support of the faculty, I was able to achieve my goal. It remains one of the most memorable achievements of my life.',
+    },
+    {
+      src:   'public/videoes/sakshi father.mp4',
+      name:  'Mr. Balkrishna Jagdale',
+      role:  'Parent of Sakshi Jagdale (92.20% in SSC)',
+      pov:   'parent',
+      quote: 'When we enrolled our daughter at VR Classes, Raj Sir and Pritam Sir gave us the confidence that she had the potential to score above 90%. Their faith in her abilities and their commitment towards every student reassured us from the very beginning. The efforts they put into her preparation, along with their constant guidance and support, helped her achieve her goal. We are truly grateful to the entire team at VR Classes for fulfilling the trust we placed in them. For us, the two letters in VR represent growth and results, and our daughter’s achievement is a reflection of that.'
+    },
+  ];
+
+  /* ── Internal state ── */
+  let teFiltered  = [...TESTIMONIALS];
+  let teIndex     = 0;
+  let tePerPage   = 3;
+  let teMaxIndex  = 0;
+
+  /* ── Compute cards visible per page based on viewport ── */
+  function teGetPerPage() {
+    if (window.innerWidth < 640)  return 1;
+    if (window.innerWidth < 1024) return 2;
+    return 3;
+  }
+
+  /* ── Build card HTML for one testimonial ── */
+  function teCardHTML(t, idx) {
+    const povLabel = t.pov === 'parent' ? 'Parent' : 'Student';
+    const povClass = t.pov === 'parent' ? 'parent' : 'student';
+    /* Avatar initials fallback */
+    const initials = t.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const avatarBg = t.pov === 'parent' ? '#0D9488' : '#F59E0B';
+    const avatarFg = t.pov === 'parent' ? '#fff'     : '#0A1628';
+
+    return `
+      <div class="vt-card" onclick="openLightbox(${idx})" role="button" tabindex="0"
+           aria-label="Watch ${t.name}'s testimonial video"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(${idx})">
+        <!-- Thumbnail -->
+        <div class="vt-thumb">
+          <video src="${t.src}" preload="metadata" muted playsinline
+                 ${t.poster ? `poster="${t.poster}"` : ''}
+                 onerror="this.closest('.vt-thumb').classList.add('vt-err')"
+                 style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          </video>
+          <!-- POV badge -->
+          <div class="vt-pov ${povClass}">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+            ${povLabel}
+          </div>
+          <!-- Play overlay -->
+          <div class="vt-play">
+            <div class="vt-play-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M6 4l12 6-12 6V4z"/></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Info strip -->
+        <div class="vt-info">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-800 flex-shrink-0"
+                 style="background:${avatarBg};color:${avatarFg};font-family:'Syne',sans-serif">
+              ${initials}
+            </div>
+            <div>
+              <div class="font-display font-700 text-navy text-sm leading-tight">${t.name}</div>
+              <div class="text-slate-400 text-xs">${t.role}</div>
+            </div>
+          </div>
+          <p class="text-slate-500 text-xs leading-relaxed line-clamp-2 italic">"${t.quote}"</p>
+        </div>
+      </div>`;
+  }
+
+  /* ── Render track ── */
+  function teRender() {
+    const track   = document.getElementById('testi-track');
+    const empty   = document.getElementById('testi-empty');
+    const nav     = document.getElementById('testi-nav');
+    if (!track) return;
+
+    tePerPage  = teGetPerPage();
+    teMaxIndex = Math.max(0, teFiltered.length - tePerPage);
+    teIndex    = Math.min(teIndex, teMaxIndex);
+
+    if (teFiltered.length === 0) {
+      track.innerHTML = '';
+      empty.classList.remove('hidden');
+      nav.classList.add('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    nav.classList.remove('hidden');
+
+    /* Build all cards */
+    track.innerHTML = teFiltered.map((t, i) => teCardHTML(t, i)).join('');
+
+    teUpdatePosition();
+    teBuildDots();
+    teUpdateArrows();
+  }
+
+  /* ── Move track ── */
+  function teUpdatePosition() {
+    const track    = document.getElementById('testi-track');
+    const cardW    = document.querySelector('.vt-card')?.offsetWidth || 0;
+    const gapPx    = 20;
+    const offset   = teIndex * (cardW + gapPx);
+    track.style.transform = `translateX(-${offset}px)`;
+  }
+
+  /* ── Build dot indicators ── */
+  function teBuildDots() {
+    const container = document.getElementById('testi-dots');
+    if (!container) return;
+    const total = teMaxIndex + 1;
+    container.innerHTML = Array.from({ length: total }, (_, i) =>
+      `<button class="testi-dot${i === teIndex ? ' active' : ''}"
+               onclick="teGoTo(${i})" aria-label="Go to slide ${i + 1}"></button>`
+    ).join('');
+  }
+
+  /* ── Update arrow disabled state ── */
+  function teUpdateArrows() {
+    const prev = document.getElementById('testi-prev');
+    const next = document.getElementById('testi-next');
+    if (prev) prev.disabled = teIndex === 0;
+    if (next) next.disabled = teIndex >= teMaxIndex;
+  }
+
+  /* ── Carousel step ── */
+  function teCarousel(dir) {
+    teIndex = Math.max(0, Math.min(teIndex + dir, teMaxIndex));
+    teUpdatePosition();
+    teBuildDots();
+    teUpdateArrows();
+  }
+
+  /* ── Go to specific page ── */
+  function teGoTo(i) {
+    teIndex = i;
+    teUpdatePosition();
+    teBuildDots();
+    teUpdateArrows();
+  }
+
+  /* ── Filter ── */
+  function filterTestimonials(pov) {
+    teFiltered = pov === 'all' ? [...TESTIMONIALS] : TESTIMONIALS.filter(t => t.pov === pov);
+    teIndex = 0;
+    teRender();
+
+    /* Update filter button styles */
+    document.querySelectorAll('.testi-filter-btn').forEach(btn => {
+      const isCurrent = btn.id === 'filter-' + pov;
+      btn.className = isCurrent
+        ? 'testi-filter-btn pill bg-navy text-white border border-navy'
+        : 'testi-filter-btn pill bg-white text-slate-600 border border-slate-200 hover:border-amber-300 cursor-pointer';
+    });
+  }
+
+  /* ── Lightbox open ── */
+  function openLightbox(idx) {
+    const t   = teFiltered[idx];
+    const lb  = document.getElementById('vt-lightbox');
+    const vid = document.getElementById('vt-lb-video');
+    const nm  = document.getElementById('vt-lb-name');
+    const rl  = document.getElementById('vt-lb-role');
+    const qt  = document.getElementById('vt-lb-quote');
+    if (!lb || !t) return;
+
+    vid.src   = t.src;
+    nm.textContent  = t.name;
+    rl.textContent  = t.role;
+    qt.textContent  = '"' + t.quote + '"';
+
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    vid.play().catch(() => {}); /* autoplay — browsers may block; user can press play */
+  }
+
+  /* ── Lightbox close ── */
+  function closeLightboxBtn() {
+    const lb  = document.getElementById('vt-lightbox');
+    const vid = document.getElementById('vt-lb-video');
+    lb.classList.remove('open');
+    vid.pause();
+    vid.src = '';
+    document.body.style.overflow = '';
+  }
+  function closeLightbox(e) {
+    if (e.target === document.getElementById('vt-lightbox')) closeLightboxBtn();
+  }
+
+  /* ── Keyboard close lightbox ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightboxBtn();
+  });
+
+  /* ── Recompute on resize ── */
+  let teResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(teResizeTimer);
+    teResizeTimer = setTimeout(() => {
+      const newPer = teGetPerPage();
+      if (newPer !== tePerPage) teRender();
+      else teUpdatePosition();
+    }, 120);
+  });
+
+  /* ── Touch / swipe support ── */
+  (function initSwipe() {
+    const vp = document.getElementById('testi-viewport');
+    if (!vp) return;
+    let startX = 0;
+    vp.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    vp.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 48) teCarousel(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  })();
+
+  /* ── Init testimonials on DOMContentLoaded ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    teRender();
+    /* Re-observe new reveal elements inside testimonials */
+    document.querySelectorAll('#testimonials .reveal').forEach(el => revealObserver.observe(el));
+    lucide.createIcons();
+  });
+
+  /* Fallback if DOMContentLoaded already fired */
+  if (document.readyState !== 'loading') {
+    teRender();
+    document.querySelectorAll('#testimonials .reveal').forEach(el => revealObserver.observe(el));
+  }
 
   /* ── Re-init icons after any DOM mutation ── */
   lucide.createIcons();
