@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VR Coaching Classes — Master the Future with AI & ML</title>
+  <meta name="description" content="Premier coaching institute in Navi Mumbai since 2004. Courses for 5th–12th grade, AI & ML, professional skills, and life excellence. 40,000+ students trained." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            navy:   { DEFAULT: '#0A1628', 50: '#E8ECF2', 100: '#C5D0E0', 200: '#8DA4C2', 300: '#5578A4', 400: '#2D5086', 500: '#0A1628', 600: '#081221', 700: '#060E1A', 800: '#040B13', 900: '#02070C' },
+            amber:  { DEFAULT: '#F59E0B', 50: '#FFFBEB', 100: '#FEF3C7', 200: '#FDE68A', 300: '#FCD34D', 400: '#FBBF24', 500: '#F59E0B', 600: '#D97706', 700: '#B45309', 800: '#92400E', 900: '#78350F' },
+            teal:   { DEFAULT: '#0D9488', 50: '#F0FDFA', 100: '#CCFBF1', 200: '#99F6E4', 300: '#5EEAD4', 400: '#2DD4BF', 500: '#14B8A6', 600: '#0D9488', 700: '#0F766E', 800: '#115E59', 900: '#134E4A' },
+            slate:  { 50: '#F8FAFC', 100: '#F1F5F9', 200: '#E2E8F0', 300: '#CBD5E1', 400: '#94A3B8', 500: '#64748B', 600: '#475569', 700: '#334155', 800: '#1E293B', 900: '#0F172A' },
+          },
+          boxShadow: {
+            'glow-amber': '0 0 30px rgba(245,158,11,0.25)',
+            'glow-teal':  '0 0 30px rgba(13,148,136,0.25)',
+            'card':       '0 4px 24px rgba(10,22,40,0.08), 0 1px 4px rgba(10,22,40,0.06)',
+            'card-hover': '0 12px 40px rgba(10,22,40,0.14), 0 2px 8px rgba(10,22,40,0.08)',
+          },
+          animation: {
+            'fade-in-up':   'fadeInUp 0.65s ease both',
+            'fade-in':      'fadeIn 0.5s ease both',
+            'float':        'float 6s ease-in-out infinite',
+            'pulse-slow':   'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite',
+          },
+          keyframes: {
+            fadeInUp: { '0%': { opacity: 0, transform: 'translateY(28px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            fadeIn:   { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+            float:    { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* ── Noise texture overlay ── */
+    .noise::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .35;
+    }
+
+    /* ── Grid pattern ── */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* ── Gradient text ── */
+    .grad-text {
+      background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 40%, #14B8A6 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-teal {
+      background: linear-gradient(135deg, #2DD4BF 0%, #0D9488 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Card hover lift ── */
+    .card-lift {
+      transition: transform 0.28s cubic-bezier(.22,.68,0,1.2), box-shadow 0.28s ease;
+    }
+    .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(10,22,40,.16), 0 4px 12px rgba(10,22,40,.1); }
+
+    /* ── Pill badge ── */
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+
+    /* ── Tab underline indicator ── */
+    .tab-btn { position: relative; padding-bottom: 10px; }
+    .tab-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; border-radius: 2px; background: #F59E0B; transition: width .3s ease; }
+    .tab-btn.active::after { width: 100%; }
+    .tab-btn.active { color: #F59E0B; }
+
+    /* ── Hamburger lines ── */
+    .ham span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: all .3s ease; }
+    .ham.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .ham.open span:nth-child(2) { opacity: 0; }
+    .ham.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ── Modal ── */
+    #modal { transition: opacity .25s ease, visibility .25s ease; }
+    #modal.hidden { opacity: 0; visibility: hidden; }
+    #modal:not(.hidden) { opacity: 1; visibility: visible; }
+    #modal-box { transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s ease; }
+    #modal.hidden #modal-box { transform: scale(.92) translateY(16px); opacity: 0; }
+    #modal:not(.hidden) #modal-box { transform: scale(1) translateY(0); opacity: 1; }
+
+    /* ── Scroll-reveal ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Stagger delays ── */
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+    .delay-4 { transition-delay: .4s; }
+    .delay-5 { transition-delay: .5s; }
+
+    /* ── Progress bar ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+      background: linear-gradient(90deg, #F59E0B, #14B8A6);
+      transition: width .1s linear;
+    }
+
+    /* ── WhatsApp pulse ── */
+    .wa-btn::before {
+      content: ''; position: absolute; inset: -4px; border-radius: 50%;
+      background: #25D366; opacity: 0;
+      animation: waPulse 2.4s ease-out infinite;
+    }
+    @keyframes waPulse { 0%{opacity:.5;transform:scale(1)} 100%{opacity:0;transform:scale(1.55)} }
+
+    /* ── Sticky nav backdrop ── */
+    #navbar { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+    /* ── Custom select ── */
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+    /* ── Accordion ── */
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+    .acc-body.open { max-height: 600px; }
+    .acc-icon { transition: transform .3s ease; }
+    .acc-icon.open { transform: rotate(45deg); }
+
+    /* ── Stat counter ── */
+    .stat-num { font-family: 'Syne', sans-serif; }
+
+    @media (max-width: 768px) {
+      #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+      #mobile-menu.open { max-height: 400px; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-body overflow-x-hidden">
+
+<!-- ═══════════════════════════════════════════════
+     PROGRESS BAR
+═══════════════════════════════════════════════ -->
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-navy/90 border-b border-white/[.07] transition-shadow duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-18">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 flex-shrink-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-teal-600 flex items-center justify-center shadow-glow-amber">
+          <span class="text-white font-display font-800 text-sm">VR</span>
+        </div>
+        <div class="leading-tight">
+          <div class="font-display font-700 text-white text-sm tracking-wide">VR Coaching</div>
+          <div class="text-amber-400 text-[10px] font-600 tracking-widest uppercase">Since 2004</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#about"   class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">About</a>
+        <a href="#courses" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Courses</a>
+        <a href="#skills"  class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Skills</a>
+        <a href="#pricing" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Pricing</a>
+        <a href="#contact" class="text-slate-300 hover:text-white text-sm font-500 transition-colors duration-200">Contact</a>
+      </div>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-3">
+        <button onclick="openModal()" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-sm rounded-xl transition-all duration-200 hover:shadow-glow-amber">
+          <i data-lucide="phone-call" class="w-4 h-4"></i> Enquire Now
+        </button>
+        <button id="ham-btn" class="ham lg:hidden flex flex-col gap-[6px] w-8 p-1 text-white" aria-label="Menu" onclick="toggleMenu()">
+          <span class="w-full"></span>
+          <span class="w-5/6"></span>
+          <span class="w-full"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden bg-navy border-t border-white/[.07]">
+    <div class="px-4 py-4 flex flex-col gap-1">
+      <a href="#about"   onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">About</a>
+      <a href="#courses" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Courses</a>
+      <a href="#skills"  onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Skills</a>
+      <a href="#pricing" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 border-b border-white/[.05] transition-colors">Pricing</a>
+      <a href="#contact" onclick="closeMenu()" class="text-slate-300 hover:text-amber-400 py-2.5 text-sm font-500 transition-colors">Contact</a>
+      <button onclick="openModal(); closeMenu();" class="mt-3 w-full py-3 bg-amber-500 text-navy font-display font-700 text-sm rounded-xl">Enquire Now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-center bg-navy noise grid-bg overflow-hidden pt-16">
+
+  <!-- Decorative blobs -->
+  <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute -bottom-32 -right-32 w-[600px] h-[600px] bg-teal-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-900/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left content -->
+      <div>
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/25 rounded-full mb-8 animate-fade-in">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-slow"></span>
+          <span class="text-amber-400 text-xs font-600 tracking-widest uppercase">Premier Institute Since 2004</span>
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-white leading-[1.08] mb-6 animate-fade-in-up" style="animation-delay:.1s">
+          Master the Future<br/>
+          with <span class="grad-text">AI & ML</span><br/>
+          Mastery
+        </h1>
+
+        <p class="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg animate-fade-in-up" style="animation-delay:.2s">
+          From school foundations to cutting-edge AI — VR Coaching Classes bridges traditional education with tomorrow's skills. <em class="text-slate-300 not-italic">To reach the top, you need a strong base.</em>
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-14 animate-fade-in-up" style="animation-delay:.3s">
+          <button onclick="openModal()" class="flex items-center justify-center gap-2 px-8 py-4 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-base rounded-2xl transition-all duration-200 hover:shadow-glow-amber hover:-translate-y-0.5">
+            <i data-lucide="rocket" class="w-5 h-5"></i> Enquire Now — Free
+          </button>
+          <a href="#courses" class="flex items-center justify-center gap-2 px-8 py-4 bg-white/[.07] hover:bg-white/[.13] border border-white/[.12] text-white font-display font-600 text-base rounded-2xl transition-all duration-200">
+            <i data-lucide="book-open" class="w-5 h-5"></i> Explore Courses
+          </a>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="flex flex-wrap gap-5 animate-fade-in-up" style="animation-delay:.4s">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-teal-500/15 flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-4 h-4 text-teal-400"></i>
+            </div>
+            <span class="text-slate-400 text-sm">E-Certificate Included</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center">
+              <i data-lucide="users" class="w-4 h-4 text-amber-400"></i>
+            </div>
+            <span class="text-slate-400 text-sm">8–12 Student Batches</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/15 flex items-center justify-center">
+              <i data-lucide="home" class="w-4 h-4 text-purple-400"></i>
+            </div>
+            <span class="text-slate-400 text-sm">Home Tuitions Available</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Stats cards -->
+      <div class="relative flex flex-col gap-6 animate-fade-in-up" style="animation-delay:.35s">
+
+        <!-- Floating main card -->
+        <div class="bg-white/[.05] border border-white/[.10] rounded-3xl p-8 backdrop-blur-sm relative overflow-hidden animate-float">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="stat-num text-5xl font-800 grad-text mb-1" data-target="40000">0</div>
+              <div class="text-slate-400 text-sm leading-tight">Students Trained<br/>& Guided</div>
+            </div>
+            <div>
+              <div class="stat-num text-5xl font-800 text-teal-400 mb-1" data-target="50000">0</div>
+              <div class="text-slate-400 text-sm leading-tight">Parents Coached<br/>Since 2004</div>
+            </div>
+            <div>
+              <div class="stat-num text-4xl font-800 text-white mb-1">22+</div>
+              <div class="text-slate-400 text-sm">Years of Excellence</div>
+            </div>
+            <div>
+              <div class="stat-num text-4xl font-800 text-white mb-1">4</div>
+              <div class="text-slate-400 text-sm">Program Tracks</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating badges -->
+        <div class="flex flex-wrap gap-3">
+          <span class="pill bg-amber-500/10 text-amber-400 border border-amber-500/20"><i data-lucide="cpu" class="w-3 h-3"></i> AI & ML</span>
+          <span class="pill bg-teal-500/10 text-teal-400 border border-teal-500/20"><i data-lucide="brain" class="w-3 h-3"></i> Deep Learning</span>
+          <span class="pill bg-purple-500/10 text-purple-400 border border-purple-500/20"><i data-lucide="target" class="w-3 h-3"></i> NLP</span>
+          <span class="pill bg-blue-500/10 text-blue-400 border border-blue-500/20"><i data-lucide="bar-chart-3" class="w-3 h-3"></i> Data Science</span>
+          <span class="pill bg-green-500/10 text-green-400 border border-green-500/20"><i data-lucide="book" class="w-3 h-3"></i> NEET / JEE</span>
+          <span class="pill bg-rose-500/10 text-rose-400 border border-rose-500/20"><i data-lucide="trending-up" class="w-3 h-3"></i> Share Market</span>
+        </div>
+
+        <!-- Location chip -->
+        <div class="inline-flex items-center gap-2 bg-white/[.05] border border-white/[.08] rounded-xl px-4 py-2.5 self-start">
+          <i data-lucide="map-pin" class="w-4 h-4 text-amber-400"></i>
+          <span class="text-slate-300 text-sm">Sector 50, Seawoods West, Navi Mumbai</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-bounce">
+    <i data-lucide="chevrons-down" class="w-5 h-5"></i>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT / TRUST STRIP
+═══════════════════════════════════════════════ -->
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: text -->
+      <div class="reveal">
+        <div class="pill bg-navy/5 text-navy border border-navy/10 mb-6">
+          <i data-lucide="award" class="w-3 h-3"></i> Established 2004
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-800 text-navy leading-tight mb-6">
+          Empowering Minds for<br/><span class="grad-text-teal">22+ Years</span>
+        </h2>
+        <p class="text-slate-500 text-lg leading-relaxed mb-8">
+          V.R. Coaching Classes is a premier educational hub in Navi Mumbai dedicated to holistic student development. We bridge the gap between traditional education and future-ready skills — from school boards to advanced AI & Machine Learning.
+        </p>
+
+        <!-- Value props -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-200 transition-colors group">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500 transition-colors">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-amber-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <div>
+              <div class="font-600 text-navy text-sm mb-0.5">Academic Excellence</div>
+              <div class="text-slate-500 text-xs leading-relaxed">CBSE, ICSE, SSC boards with expert faculty</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition-colors group">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-500 transition-colors">
+              <i data-lucide="cpu" class="w-5 h-5 text-teal-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <div>
+              <div class="font-600 text-navy text-sm mb-0.5">AI & Tech Training</div>
+              <div class="text-slate-500 text-xs leading-relaxed">Hands-on ML projects & real deployments</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-purple-200 transition-colors group">
+            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500 transition-colors">
+              <i data-lucide="sparkles" class="w-5 h-5 text-purple-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <div>
+              <div class="font-600 text-navy text-sm mb-0.5">Holistic Development</div>
+              <div class="text-slate-500 text-xs leading-relaxed">Life skills, leadership & personality growth</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 transition-colors group">
+            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500 transition-colors">
+              <i data-lucide="users-2" class="w-5 h-5 text-green-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <div>
+              <div class="font-600 text-navy text-sm mb-0.5">Small Batch Sizes</div>
+              <div class="text-slate-500 text-xs leading-relaxed">8–12 students for focused attention</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Stats -->
+      <div class="reveal delay-2">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="col-span-2 p-8 bg-navy rounded-3xl relative overflow-hidden card-lift">
+            <div class="absolute inset-0 bg-gradient-to-br from-amber-500/15 to-transparent pointer-events-none"></div>
+            <div class="relative">
+              <div class="font-display text-6xl font-800 text-amber-400 mb-2" data-counter="40000">40,000+</div>
+              <div class="text-slate-300 font-500">Students Trained & Guided since 2004</div>
+              <div class="mt-4 flex gap-1">
+                <div class="h-1 w-2/3 bg-amber-400 rounded-full"></div>
+                <div class="h-1 flex-1 bg-white/10 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 bg-teal-600 rounded-3xl relative overflow-hidden card-lift">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+            <div class="font-display text-4xl font-800 text-white mb-1">50K+</div>
+            <div class="text-teal-100 text-sm font-500">Parents Coached</div>
+          </div>
+          <div class="p-6 bg-slate-100 rounded-3xl card-lift">
+            <div class="font-display text-4xl font-800 text-navy mb-1">22+</div>
+            <div class="text-slate-500 text-sm font-500">Years Excellence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     COURSES (Tabbed)
+═══════════════════════════════════════════════ -->
+<section id="courses" class="py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section header -->
+    <div class="text-center mb-14 reveal">
+      <div class="pill bg-amber-100 text-amber-700 border border-amber-200 mx-auto mb-4">
+        <i data-lucide="layers" class="w-3 h-3"></i> Specialized Programs
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-navy mb-4">
+        Comprehensive Learning Paths<br/><span class="grad-text">for Every Stage</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Every course is engineered to build a strong foundation and deliver measurable outcomes.</p>
+    </div>
+
+    <!-- Tab navigation -->
+    <div class="flex flex-wrap gap-8 border-b border-slate-200 mb-12 reveal">
+      <button class="tab-btn active font-display font-600 text-slate-500 text-sm" data-tab="academic">Academic</button>
+      <button class="tab-btn font-display font-600 text-slate-500 text-sm" data-tab="professional">Professional Skills</button>
+      <button class="tab-btn font-display font-600 text-slate-500 text-sm" data-tab="life">Life Excellence</button>
+      <button class="tab-btn font-display font-600 text-slate-500 text-sm" data-tab="tuitions">Tuitions</button>
+    </div>
+
+    <!-- Tab: Academic -->
+    <div id="tab-academic" class="tab-content">
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Foundation -->
+        <div class="bg-white rounded-3xl border border-slate-100 shadow-card overflow-hidden card-lift reveal">
+          <div class="h-2 bg-gradient-to-r from-amber-400 to-amber-600"></div>
+          <div class="p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="pill bg-amber-100 text-amber-700 border border-amber-200 mb-3">
+                  <i data-lucide="book" class="w-3 h-3"></i> Foundation
+                </div>
+                <h3 class="font-display text-2xl font-800 text-navy">Foundation Course</h3>
+                <p class="text-slate-500 text-sm mt-1">5th to 8th Standard</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center">
+                <i data-lucide="school" class="w-7 h-7 text-amber-600"></i>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed">Build rock-solid academic foundations. Tailored curriculum ensures consistent performance across all major boards from Grade 5 through 8.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="pill bg-blue-50 text-blue-600 border border-blue-100">CBSE</span>
+              <span class="pill bg-purple-50 text-purple-600 border border-purple-100">ICSE</span>
+              <span class="pill bg-green-50 text-green-600 border border-green-100">SSC</span>
+            </div>
+            <ul class="space-y-2.5 mb-8">
+              <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> All core subjects covered</li>
+              <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> E-Books & study material included</li>
+              <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> Regular progress assessments</li>
+            </ul>
+            <button onclick="openModal()" class="w-full py-3.5 bg-navy text-white font-display font-700 text-sm rounded-xl hover:bg-navy/80 transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Enquire About Foundation
+            </button>
+          </div>
+        </div>
+
+        <!-- Integrated -->
+        <div class="bg-white rounded-3xl border border-slate-100 shadow-card overflow-hidden card-lift reveal delay-1">
+          <div class="h-2 bg-gradient-to-r from-teal-400 to-teal-600"></div>
+          <div class="p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="pill bg-teal-100 text-teal-700 border border-teal-200 mb-3">
+                  <i data-lucide="zap" class="w-3 h-3"></i> Integrated
+                </div>
+                <h3 class="font-display text-2xl font-800 text-navy">Integrated Course</h3>
+                <p class="text-slate-500 text-sm mt-1">9th to 12th Standard</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-teal-100 flex items-center justify-center">
+                <i data-lucide="flask-conical" class="w-7 h-7 text-teal-600"></i>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed">Dual-track preparation for competitive exams and boards. Science and Commerce streams with dedicated focus on entrance exams.</p>
+
+            <!-- Accordion for streams -->
+            <div class="space-y-2 mb-6">
+              <div class="rounded-xl border border-slate-100 overflow-hidden">
+                <button class="acc-trigger w-full text-left flex items-center justify-between p-4 text-navy font-600 text-sm bg-slate-50 hover:bg-slate-100 transition-colors">
+                  <span class="flex items-center gap-2"><i data-lucide="atom" class="w-4 h-4 text-teal-500"></i> Science Stream</span>
+                  <i data-lucide="plus" class="w-4 h-4 acc-icon text-slate-400"></i>
+                </button>
+                <div class="acc-body px-4">
+                  <div class="flex flex-wrap gap-2 pb-4 pt-2">
+                    <span class="pill bg-red-50 text-red-600 border border-red-100">NEET</span>
+                    <span class="pill bg-blue-50 text-blue-600 border border-blue-100">JEE</span>
+                    <span class="pill bg-green-50 text-green-600 border border-green-100">CET</span>
+                    <span class="pill bg-orange-50 text-orange-600 border border-orange-100">MPSC</span>
+                    <span class="pill bg-navy/5 text-navy border border-navy/10">NDA</span>
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-xl border border-slate-100 overflow-hidden">
+                <button class="acc-trigger w-full text-left flex items-center justify-between p-4 text-navy font-600 text-sm bg-slate-50 hover:bg-slate-100 transition-colors">
+                  <span class="flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4 text-amber-500"></i> Commerce Stream</span>
+                  <i data-lucide="plus" class="w-4 h-4 acc-icon text-slate-400"></i>
+                </button>
+                <div class="acc-body px-4">
+                  <div class="flex flex-wrap gap-2 pb-4 pt-2">
+                    <span class="pill bg-amber-50 text-amber-600 border border-amber-100">Accountancy</span>
+                    <span class="pill bg-purple-50 text-purple-600 border border-purple-100">Economics</span>
+                    <span class="pill bg-teal-50 text-teal-600 border border-teal-100">Business Studies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="openModal()" class="w-full py-3.5 bg-teal-600 text-white font-display font-700 text-sm rounded-xl hover:bg-teal-500 transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Enquire About Integrated
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Professional -->
+    <div id="tab-professional" class="tab-content hidden">
+      <div class="reveal">
+        <p class="text-slate-500 text-base mb-8 max-w-2xl">Industry-ready skills designed for students and working professionals. Each module is hands-on and tied to real-world outcomes.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Card: AI/ML -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center mb-4 group-hover:bg-amber-500 transition-colors">
+              <i data-lucide="cpu" class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">AI & Machine Learning</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Deep learning, NLP, computer vision & real project deployment</p>
+          </div>
+          <!-- Coding -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors">
+              <i data-lucide="code-2" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">Coding</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Python, web development & algorithmic thinking from scratch</p>
+          </div>
+          <!-- Share Market -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center mb-4 group-hover:bg-green-500 transition-colors">
+              <i data-lucide="trending-up" class="w-6 h-6 text-green-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">Share Market</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Technical analysis, trading strategies & wealth creation skills</p>
+          </div>
+          <!-- English Speaking -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center mb-4 group-hover:bg-purple-500 transition-colors">
+              <i data-lucide="mic" class="w-6 h-6 text-purple-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">English Speaking</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Fluency, grammar, presentations & professional communication</p>
+          </div>
+          <!-- Vedic Maths -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center mb-4 group-hover:bg-rose-500 transition-colors">
+              <i data-lucide="calculator" class="w-6 h-6 text-rose-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">Vedic Mathematics</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Speed maths techniques for competitive exam edge</p>
+          </div>
+          <!-- Abacus -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center mb-4 group-hover:bg-indigo-500 transition-colors">
+              <i data-lucide="binary" class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">Abacus</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Mental arithmetic & concentration for young learners</p>
+          </div>
+          <!-- Drawing -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-pink-100 flex items-center justify-center mb-4 group-hover:bg-pink-500 transition-colors">
+              <i data-lucide="pencil" class="w-6 h-6 text-pink-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">Drawing Classes</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Creative arts, sketching & fine arts development</p>
+          </div>
+          <!-- DMIT -->
+          <div class="group bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift cursor-pointer" onclick="openModal()">
+            <div class="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center mb-4 group-hover:bg-orange-500 transition-colors">
+              <i data-lucide="fingerprint" class="w-6 h-6 text-orange-600 group-hover:text-white transition-colors"></i>
+            </div>
+            <h4 class="font-display font-700 text-navy mb-1.5">DMIT</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">Dermatoglyphics — discover hidden potential via fingerprint analysis</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Life Excellence -->
+    <div id="tab-life" class="tab-content hidden">
+      <div class="reveal">
+        <p class="text-slate-500 text-base mb-8 max-w-2xl">Holistic development that goes beyond academics — building the mindset, habits and character for lifelong success.</p>
+        <div class="grid sm:grid-cols-3 gap-5">
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="target" class="w-5 h-5 text-amber-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Goal Setting</h4><p class="text-slate-500 text-xs leading-relaxed">Define, plan & achieve ambitious personal and professional goals</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="clock" class="w-5 h-5 text-teal-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Time Management</h4><p class="text-slate-500 text-xs leading-relaxed">Prioritize effectively and maximize productivity every single day</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="activity" class="w-5 h-5 text-blue-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">SWOT Analysis</h4><p class="text-slate-500 text-xs leading-relaxed">Self-assess strengths and convert weaknesses into opportunities</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="crown" class="w-5 h-5 text-purple-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Leadership Skills</h4><p class="text-slate-500 text-xs leading-relaxed">Build authority, inspire others & lead teams with confidence</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="brain" class="w-5 h-5 text-rose-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">NLP Excellence</h4><p class="text-slate-500 text-xs leading-relaxed">Reprogram beliefs and unlock unlimited mental potential via NLP</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="landmark" class="w-5 h-5 text-green-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Financial Skills</h4><p class="text-slate-500 text-xs leading-relaxed">Budgeting, investing basics & wealth mindset for future leaders</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="lightbulb" class="w-5 h-5 text-indigo-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Cognitive Skills</h4><p class="text-slate-500 text-xs leading-relaxed">Memory techniques, critical thinking & creative problem solving</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="briefcase" class="w-5 h-5 text-orange-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Career Management</h4><p class="text-slate-500 text-xs leading-relaxed">Roadmap planning, interview prep & professional positioning</p></div>
+          </div>
+          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-card card-lift flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-pink-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="message-square" class="w-5 h-5 text-pink-600"></i>
+            </div>
+            <div><h4 class="font-700 text-navy text-sm mb-1">Communication Skills</h4><p class="text-slate-500 text-xs leading-relaxed">Persuasion, public speaking & effective interpersonal dynamics</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Tuitions -->
+    <div id="tab-tuitions" class="tab-content hidden">
+      <div class="grid md:grid-cols-2 gap-8 reveal">
+        <div class="bg-white border border-slate-100 rounded-3xl p-8 shadow-card card-lift">
+          <div class="w-14 h-14 rounded-2xl bg-navy flex items-center justify-center mb-6">
+            <i data-lucide="users" class="w-7 h-7 text-white"></i>
+          </div>
+          <div class="pill bg-amber-100 text-amber-700 border border-amber-200 mb-4">
+            <i data-lucide="star" class="w-3 h-3"></i> Batch Learning
+          </div>
+          <h3 class="font-display text-2xl font-800 text-navy mb-3">Group Tuitions</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">Small, focused batches of 8–12 students ensure personalized attention while maintaining the collaborative energy of a classroom. Affordable and highly effective.</p>
+          <ul class="space-y-2.5 mb-8">
+            <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> 8 to 12 students per batch</li>
+            <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> Peer-to-peer learning environment</li>
+            <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> Most cost-effective option</li>
+            <li class="flex items-center gap-2.5 text-slate-600 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 flex-shrink-0"></i> E-Books & E-Resources included</li>
+          </ul>
+          <button onclick="openModal()" class="w-full py-3.5 bg-navy text-white font-display font-700 text-sm rounded-xl hover:bg-navy/80 transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i> Enquire About Group
+          </button>
+        </div>
+
+        <div class="bg-navy rounded-3xl p-8 relative overflow-hidden card-lift">
+          <div class="absolute inset-0 bg-gradient-to-br from-amber-500/15 to-teal-600/15 pointer-events-none"></div>
+          <div class="relative">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500 flex items-center justify-center mb-6">
+              <i data-lucide="home" class="w-7 h-7 text-white"></i>
+            </div>
+            <div class="pill bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-4">
+              <i data-lucide="zap" class="w-3 h-3"></i> Personalized
+            </div>
+            <h3 class="font-display text-2xl font-800 text-white mb-3">Private & Home Tuitions</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">One-on-one attention at your home for maximum comfort and focused learning. Available for all subjects and all grade levels — completely customized to your child's pace.</p>
+            <ul class="space-y-2.5 mb-8">
+              <li class="flex items-center gap-2.5 text-slate-300 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i> Available for all subjects</li>
+              <li class="flex items-center gap-2.5 text-slate-300 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i> Flexible scheduling</li>
+              <li class="flex items-center gap-2.5 text-slate-300 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i> 100% customized curriculum</li>
+              <li class="flex items-center gap-2.5 text-slate-300 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i> E-Certificate upon completion</li>
+            </ul>
+            <button onclick="openModal()" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Enquire About Home Tuition
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRICING
+═══════════════════════════════════════════════ -->
+<section id="pricing" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <div class="pill bg-teal-100 text-teal-700 border border-teal-200 mx-auto mb-4">
+        <i data-lucide="tag" class="w-3 h-3"></i> AI/ML Courses
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-navy mb-4">
+        Choose Your <span class="grad-text-teal">AI Journey</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-lg mx-auto">Transparent plans designed to get you industry-ready from day one.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+      <!-- Basic -->
+      <div class="relative bg-white border-2 border-slate-200 rounded-3xl p-8 card-lift reveal">
+        <h3 class="font-display text-2xl font-800 text-navy mb-2">Basic Course</h3>
+        <p class="text-slate-500 text-sm mb-6">Perfect starting point for AI exploration</p>
+        <div class="h-px bg-slate-100 mb-6"></div>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-slate-600 text-sm">
+            <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+            </div> Premium Access to AI Resources
+          </li>
+          <li class="flex items-center gap-3 text-slate-600 text-sm">
+            <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+            </div> AI Industry Knowledge & Fundamentals
+          </li>
+          <li class="flex items-center gap-3 text-slate-600 text-sm">
+            <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+            </div> E-Books & E-Resources Included
+          </li>
+          <li class="flex items-center gap-3 text-slate-400 text-sm">
+            <div class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="x" class="w-3 h-3 text-slate-400"></i>
+            </div> Capstone Project Deployment
+          </li>
+          <li class="flex items-center gap-3 text-slate-400 text-sm">
+            <div class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="x" class="w-3 h-3 text-slate-400"></i>
+            </div> Full Fledge Hands-on AI/ML Project
+          </li>
+        </ul>
+        <a href="https://wa.me/919082450261" target="_blank" class="w-full py-3.5 border-2 border-navy text-navy font-display font-700 text-sm rounded-xl hover:bg-navy hover:text-white transition-all flex items-center justify-center gap-2">
+          <i data-lucide="message-circle" class="w-4 h-4"></i> Get Started
+        </a>
+      </div>
+
+      <!-- Advanced (Popular) -->
+      <div class="relative bg-navy rounded-3xl p-8 card-lift shadow-glow-teal reveal delay-1 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-amber-500/10 pointer-events-none"></div>
+
+        <!-- Popular badge -->
+        <div class="absolute -top-px left-1/2 -translate-x-1/2">
+          <div class="px-5 py-1.5 bg-amber-500 rounded-b-xl text-navy font-display font-700 text-xs uppercase tracking-wider">
+            ✦ Most Popular
+          </div>
+        </div>
+
+        <div class="relative mt-4">
+          <h3 class="font-display text-2xl font-800 text-white mb-2">Advance Course</h3>
+          <p class="text-slate-400 text-sm mb-6">Full hands-on AI/ML mastery track</p>
+          <div class="h-px bg-white/10 mb-6"></div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-slate-300 text-sm">
+              <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-3 h-3 text-amber-400"></i>
+              </div> Full Premium AI Access
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 text-sm">
+              <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-3 h-3 text-amber-400"></i>
+              </div> Full Fledge Hands-on AI/ML Project
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 text-sm">
+              <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-3 h-3 text-amber-400"></i>
+              </div> E-Certificate & Premium E-Books
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 text-sm">
+              <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-3 h-3 text-amber-400"></i>
+              </div> Capstone Project Deployment
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 text-sm">
+              <div class="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check" class="w-3 h-3 text-amber-400"></i>
+              </div> AI Industry Knowledge & Resources
+            </li>
+          </ul>
+          <a href="https://wa.me/919082450261" target="_blank" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> Enroll Now on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA BANNER
+═══════════════════════════════════════════════ -->
+<section id="skills" class="py-20 bg-navy relative overflow-hidden noise">
+  <div class="absolute inset-0 bg-gradient-to-r from-teal-900/40 to-navy pointer-events-none"></div>
+  <div class="absolute -right-24 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center reveal">
+      <div>
+        <div class="pill bg-amber-500/15 text-amber-400 border border-amber-500/25 mb-6">
+          <i data-lucide="zap" class="w-3 h-3"></i> Ready to Start?
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-800 text-white mb-4">
+          Your Transformation<br/>Begins with One Call
+        </h2>
+        <p class="text-slate-400 text-lg leading-relaxed mb-8">
+          Join 40,000+ students who've already built their future with VR Coaching Classes. Talk to <strong class="text-white">Raj Sir</strong> directly — get your questions answered in minutes.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button onclick="openModal()" class="flex items-center justify-center gap-2 px-8 py-4 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-base rounded-2xl transition-all hover:shadow-glow-amber">
+            <i data-lucide="phone-call" class="w-5 h-5"></i> Enquire Now — Free
+          </button>
+          <a href="https://wa.me/919082450261" target="_blank" class="flex items-center justify-center gap-2 px-8 py-4 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/20 font-display font-700 text-base rounded-2xl transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick facts -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white/[.05] border border-white/[.08] rounded-2xl p-6 reveal delay-1">
+          <i data-lucide="map-pin" class="w-6 h-6 text-amber-400 mb-3"></i>
+          <div class="font-display font-700 text-white text-sm mb-1">Location</div>
+          <div class="text-slate-400 text-xs leading-relaxed">Shop No.14, Shelter Plaza, Sector 50, Old Seawoods West, Navi Mumbai</div>
+        </div>
+        <div class="bg-white/[.05] border border-white/[.08] rounded-2xl p-6 reveal delay-2">
+          <i data-lucide="phone" class="w-6 h-6 text-teal-400 mb-3"></i>
+          <div class="font-display font-700 text-white text-sm mb-1">Call Us</div>
+          <a href="tel:+919082450261" class="text-slate-400 text-xs hover:text-white transition-colors">+91 90824 50261<br/><span class="text-amber-400">Raj Sir</span></a>
+        </div>
+        <div class="bg-white/[.05] border border-white/[.08] rounded-2xl p-6 reveal delay-3">
+          <i data-lucide="clock" class="w-6 h-6 text-purple-400 mb-3"></i>
+          <div class="font-display font-700 text-white text-sm mb-1">Batch Sizes</div>
+          <div class="text-slate-400 text-xs leading-relaxed">8–12 students in group batches. Private & home options available.</div>
+        </div>
+        <div class="bg-white/[.05] border border-white/[.08] rounded-2xl p-6 reveal delay-4">
+          <i data-lucide="award" class="w-6 h-6 text-green-400 mb-3"></i>
+          <div class="font-display font-700 text-white text-sm mb-1">Certification</div>
+          <div class="text-slate-400 text-xs leading-relaxed">E-Certificate & Premium E-Books upon course completion.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════ -->
+<section id="contact" class="py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <div class="pill bg-navy/5 text-navy border border-navy/10 mx-auto mb-4">
+        <i data-lucide="mail" class="w-3 h-3"></i> Get In Touch
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-800 text-navy mb-4">
+        Let's Talk About<br/><span class="grad-text">Your Future</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-md mx-auto">To reach the top… you need a strong base. Start building yours today.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10 items-start">
+      <!-- Contact info -->
+      <div class="lg:col-span-2 space-y-5 reveal">
+        <a href="tel:+919082450261" class="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-card hover:border-amber-200 transition-colors group">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500 transition-colors">
+            <i data-lucide="phone" class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors"></i>
+          </div>
+          <div>
+            <div class="text-xs font-600 text-slate-500 uppercase tracking-wide mb-0.5">Call Us — Raj Sir</div>
+            <div class="font-display font-700 text-navy">+91 90824 50261</div>
+          </div>
+        </a>
+
+        <div class="flex items-start gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-card">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="map-pin" class="w-6 h-6 text-teal-600"></i>
+          </div>
+          <div>
+            <div class="text-xs font-600 text-slate-500 uppercase tracking-wide mb-0.5">Our Location</div>
+            <div class="font-500 text-navy text-sm leading-relaxed">Shop No.14, Shelter Plaza,<br/>Sector 50, Old Seawoods West,<br/>Navi Mumbai</div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/919082450261" target="_blank" class="flex items-center gap-4 p-5 bg-[#25D366]/5 border border-[#25D366]/20 rounded-2xl hover:border-[#25D366]/40 transition-colors group">
+          <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="message-circle" class="w-6 h-6 text-[#25D366]"></i>
+          </div>
+          <div>
+            <div class="text-xs font-600 text-slate-500 uppercase tracking-wide mb-0.5">WhatsApp</div>
+            <div class="font-display font-700 text-navy">Chat Instantly</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Form -->
+      <div class="lg:col-span-3 reveal delay-2">
+        <div class="bg-white border border-slate-100 rounded-3xl p-8 shadow-card">
+          <h3 class="font-display text-xl font-800 text-navy mb-6">Send an Enquiry</h3>
+          <div id="contact-form-wrap">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Full Name *</label>
+                <input id="cf-name" type="text" placeholder="Your full name" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+              </div>
+              <div>
+                <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Phone Number *</label>
+                <input id="cf-phone" type="tel" placeholder="+91 XXXXX XXXXX" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Email Address</label>
+              <input id="cf-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+            </div>
+            <div class="mb-4">
+              <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Select Course *</label>
+              <select id="cf-course" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all bg-white">
+                <option value="">— Choose a course —</option>
+                <option>Foundation Course (5th–8th)</option>
+                <option>Integrated Course — Science (NEET/JEE/CET)</option>
+                <option>Integrated Course — Commerce</option>
+                <option>AI & Machine Learning</option>
+                <option>Coding</option>
+                <option>Share Market</option>
+                <option>English Speaking</option>
+                <option>Vedic Maths</option>
+                <option>Abacus / DMIT</option>
+                <option>Life & Soft Skills</option>
+                <option>Private / Home Tuition</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Message (Optional)</label>
+              <textarea id="cf-msg" rows="3" placeholder="Any specific questions or requirements..." class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all resize-none"></textarea>
+            </div>
+            <button onclick="submitContactForm()" class="w-full py-4 bg-navy hover:bg-navy/80 text-white font-display font-700 text-sm rounded-xl transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i> Send Enquiry
+            </button>
+          </div>
+          <div id="cf-success" class="hidden text-center py-10">
+            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="check-circle" class="w-8 h-8 text-green-500"></i>
+            </div>
+            <h4 class="font-display font-800 text-navy text-xl mb-2">Enquiry Sent!</h4>
+            <p class="text-slate-500 text-sm">Thank you! Raj Sir will contact you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="bg-navy text-slate-400 py-12 border-t border-white/[.06]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-teal-600 flex items-center justify-center">
+            <span class="text-white font-display font-800 text-sm">VR</span>
+          </div>
+          <div>
+            <div class="font-display font-700 text-white text-sm">VR Coaching Classes</div>
+            <div class="text-amber-400 text-[10px] font-600 tracking-widest uppercase">Since 2004</div>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed max-w-xs">Premier educational hub in Navi Mumbai. Bridging traditional education with future-ready skills for 22+ years.</p>
+        <div class="mt-4 text-sm">
+          <a href="tel:+919082450261" class="text-amber-400 hover:text-amber-300 transition-colors font-600">+91 90824 50261</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-display font-700 text-white text-sm mb-4 uppercase tracking-wider">Courses</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#courses" class="hover:text-white transition-colors">Foundation (5th–8th)</a></li>
+          <li><a href="#courses" class="hover:text-white transition-colors">Integrated (9th–12th)</a></li>
+          <li><a href="#courses" class="hover:text-white transition-colors">AI & Machine Learning</a></li>
+          <li><a href="#courses" class="hover:text-white transition-colors">Coding</a></li>
+          <li><a href="#courses" class="hover:text-white transition-colors">Share Market</a></li>
+          <li><a href="#courses" class="hover:text-white transition-colors">Life & Soft Skills</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="font-display font-700 text-white text-sm mb-4 uppercase tracking-wider">Quick Links</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+          <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="https://wa.me/919082450261" target="_blank" class="hover:text-white transition-colors">WhatsApp Us</a></li>
+        </ul>
+        <div class="mt-6">
+          <div class="font-display font-700 text-white text-sm mb-3 uppercase tracking-wider">Location</div>
+          <p class="text-sm leading-relaxed">Shop No.14, Shelter Plaza,<br/>Sector 50, Seawoods West,<br/>Navi Mumbai</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/[.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div>© 2026 VR Coaching Classes. All rights reserved.</div>
+      <div class="flex items-center gap-1">Made with <span class="text-rose-400 mx-1">♥</span> in Navi Mumbai</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     ENQUIRY MODAL
+═══════════════════════════════════════════════ -->
+<div id="modal" class="hidden fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-4" role="dialog" aria-modal="true">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-navy/70 backdrop-blur-sm" onclick="closeModal()"></div>
+
+  <!-- Modal box -->
+  <div id="modal-box" class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 sm:p-10 z-10 max-h-[90vh] overflow-y-auto">
+
+    <!-- Close -->
+    <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+      <i data-lucide="x" class="w-4 h-4 text-slate-600"></i>
+    </button>
+
+    <!-- Header -->
+    <div class="mb-6">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-teal-600 flex items-center justify-center mb-4">
+        <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+      </div>
+      <h3 class="font-display text-2xl font-800 text-navy mb-1">Enquire Now</h3>
+      <p class="text-slate-500 text-sm">Leave your details — Raj Sir will call you back within 24 hours.</p>
+    </div>
+
+    <div id="modal-form">
+      <div class="mb-4">
+        <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Full Name *</label>
+        <input id="m-name" type="text" placeholder="Your full name" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+      </div>
+      <div class="mb-4">
+        <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Phone Number *</label>
+        <input id="m-phone" type="tel" placeholder="+91 XXXXX XXXXX" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+      </div>
+      <div class="mb-4">
+        <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Email Address</label>
+        <input id="m-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all" />
+      </div>
+      <div class="mb-6">
+        <label class="text-xs font-600 text-slate-500 uppercase tracking-wide block mb-1.5">Interested Course *</label>
+        <select id="m-course" class="w-full px-4 py-3 border border-slate-200 rounded-xl text-navy text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/15 transition-all bg-white">
+          <option value="">— Select a course —</option>
+          <option>Foundation Course (5th–8th)</option>
+          <option>Integrated Course — Science (NEET/JEE/CET)</option>
+          <option>Integrated Course — Commerce</option>
+          <option>AI & Machine Learning</option>
+          <option>Coding</option>
+          <option>Share Market</option>
+          <option>English Speaking</option>
+          <option>Vedic Maths</option>
+          <option>Abacus / DMIT</option>
+          <option>Life & Soft Skills</option>
+          <option>Private / Home Tuition</option>
+        </select>
+      </div>
+
+      <button onclick="submitModal()" class="w-full py-4 bg-amber-500 hover:bg-amber-400 text-navy font-display font-700 text-base rounded-xl transition-all hover:shadow-glow-amber flex items-center justify-center gap-2">
+        <i data-lucide="send" class="w-5 h-5"></i> Submit Enquiry
+      </button>
+
+      <p class="text-center text-xs text-slate-400 mt-4">Or call directly: <a href="tel:+919082450261" class="text-amber-600 font-600 hover:underline">+91 90824 50261</a></p>
+    </div>
+
+    <div id="modal-success" class="hidden text-center py-6">
+      <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
+        <i data-lucide="check-circle" class="w-10 h-10 text-green-500"></i>
+      </div>
+      <h4 class="font-display font-800 text-navy text-2xl mb-2">Enquiry Received!</h4>
+      <p class="text-slate-500 text-sm mb-6">Thank you for reaching out. Raj Sir will contact you within 24 hours to discuss your learning journey.</p>
+      <button onclick="closeModal()" class="px-8 py-3 bg-navy text-white font-display font-700 text-sm rounded-xl hover:bg-navy/80 transition-colors">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     WHATSAPP FLOATING BUTTON
+═══════════════════════════════════════════════ -->
+<a href="https://wa.me/919082450261" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-xl relative wa-btn hover:scale-110 transition-transform duration-200" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+  /* ── Icon init ── */
+  lucide.createIcons();
+
+  /* ── Progress bar ── */
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('progress-bar');
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    el.style.width = pct + '%';
+  });
+
+  /* ── Navbar shadow on scroll ── */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 32px rgba(0,0,0,.3)' : 'none';
+  });
+
+  /* ── Mobile menu ── */
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const ham = document.getElementById('ham-btn');
+    menu.classList.toggle('open');
+    ham.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('ham-btn').classList.remove('open');
+  }
+
+  /* ── Modal ── */
+  function openModal() {
+    const m = document.getElementById('modal');
+    m.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    document.body.style.overflow = '';
+    document.getElementById('modal-form').classList.remove('hidden');
+    document.getElementById('modal-success').classList.add('hidden');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function submitModal() {
+    const name = document.getElementById('m-name').value.trim();
+    const phone = document.getElementById('m-phone').value.trim();
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+    document.getElementById('modal-form').classList.add('hidden');
+    document.getElementById('modal-success').classList.remove('hidden');
+    lucide.createIcons();
+  }
+
+  /* ── Contact form ── */
+  function submitContactForm() {
+    const name  = document.getElementById('cf-name').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
+    document.getElementById('contact-form-wrap').classList.add('hidden');
+    document.getElementById('cf-success').classList.remove('hidden');
+    lucide.createIcons();
+  }
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+      btn.classList.add('active');
+      const id = 'tab-' + btn.dataset.tab;
+      const panel = document.getElementById(id);
+      panel.classList.remove('hidden');
+      panel.querySelectorAll('.reveal').forEach(el => {
+        el.classList.remove('visible');
+        requestAnimationFrame(() => { setTimeout(() => el.classList.add('visible'), 60); });
+      });
+      lucide.createIcons();
+    });
+  });
+
+  /* ── Accordions ── */
+  document.querySelectorAll('.acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const icon = btn.querySelector('.acc-icon');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      icon.classList.toggle('open', !isOpen);
+    });
+  });
+
+  /* ── Scroll-reveal ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Counter animation ── */
+  function animateCount(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start).toLocaleString('en-IN') + '+';
+    }, 16);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        if (!isNaN(target)) {
+          animateCount(el, target, 1800);
+          counterObserver.unobserve(el);
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  /* ── Re-init icons after any DOM mutation ── */
+  lucide.createIcons();
+</script>
+</body>
+</html>
